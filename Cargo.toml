@@ -7,14 +7,18 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+axum = { version = "0.7.9", optional = true }
 dioxus = { version = "0.6.0", features = ["fullstack"] }
+sqlx = { version = "0.8.6", optional = true }
+tokio = { version = "1.45.1", features = ["full"], optional = true }
 
 [features]
 default = []
 web = ["dioxus/web"]
 desktop = ["dioxus/desktop"]
 mobile = ["dioxus/mobile"]
-server = ["dioxus/server"]
+server = ["dioxus/server", "dep:axum", "dep:tokio"]
+axum = ["dep:axum"]
 
 [profile.wasm-dev]
 inherits = "dev"
