@@ -9,7 +9,8 @@ edition = "2021"
 [dependencies]
 axum = { version = "0.7.9", optional = true }
 dioxus = { version = "0.6.0", features = ["fullstack"] }
-sqlx = { version = "0.8.6", optional = true }
+dotenvy = { version = "0.15.7", optional = true }
+sqlx = { version = "0.8.6", optional = true, features = ["chrono", "macros", "mysql", "runtime-tokio", "tls-native-tls"] }
 tokio = { version = "1.45.1", features = ["full"], optional = true }
 
 [features]
@@ -17,8 +18,7 @@ default = []
 web = ["dioxus/web"]
 desktop = ["dioxus/desktop"]
 mobile = ["dioxus/mobile"]
-server = ["dioxus/server", "dep:axum", "dep:tokio"]
-axum = ["dep:axum"]
+server = ["dioxus/server", "dep:dotenvy", "dep:axum", "dep:tokio", "dep:sqlx"]
 
 [profile.wasm-dev]
 inherits = "dev"
